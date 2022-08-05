@@ -7,15 +7,21 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.Color;
 
 public class VentanaPrueba extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField txtNumero1;
+	private JTextField txtNumero2;
+	private JLabel lblResultado;
 
 	/**
 	 * Launch the application.
@@ -45,29 +51,63 @@ public class VentanaPrueba extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Número 1:");
-		lblNewLabel.setFont(new Font("Verdana", Font.PLAIN, 14));
-		lblNewLabel.setBounds(55, 30, 117, 24);
-		contentPane.add(lblNewLabel);
+		JLabel lblNumero1 = new JLabel("Número 1:");
+		lblNumero1.setFont(new Font("Verdana", Font.PLAIN, 14));
+		lblNumero1.setBounds(55, 30, 76, 24);
+		contentPane.add(lblNumero1);
 		
-		textField = new JTextField();
-		textField.setBounds(138, 36, 214, 18);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		txtNumero1 = new JTextField();
+		txtNumero1.setFont(new Font("Verdana", Font.PLAIN, 14));
+		txtNumero1.setBounds(138, 36, 214, 18);
+		contentPane.add(txtNumero1);
+		txtNumero1.setColumns(10);
 		
-		JLabel lblNmero = new JLabel("Número 2:");
-		lblNmero.setFont(new Font("Verdana", Font.PLAIN, 14));
-		lblNmero.setBounds(55, 62, 85, 24);
-		contentPane.add(lblNmero);
+		JLabel lblNumero2 = new JLabel("Número 2:");
+		lblNumero2.setFont(new Font("Verdana", Font.PLAIN, 14));
+		lblNumero2.setBounds(55, 62, 85, 24);
+		contentPane.add(lblNumero2);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(138, 68, 214, 18);
-		contentPane.add(textField_1);
+		txtNumero2 = new JTextField();
+		txtNumero2.setFont(new Font("Verdana", Font.PLAIN, 14));
+		txtNumero2.setColumns(10);
+		txtNumero2.setBounds(138, 68, 214, 18);
+		contentPane.add(txtNumero2);
 		
-		JButton btnNewButton = new JButton("Aceptar");
-		btnNewButton.setFont(new Font("Verdana", Font.PLAIN, 14));
-		btnNewButton.setBounds(165, 148, 105, 33);
-		contentPane.add(btnNewButton);
+		JButton btnAceptar = new JButton("Aceptar");
+		btnAceptar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				sumar();
+			}
+		});
+		btnAceptar.setFont(new Font("Verdana", Font.PLAIN, 14));
+		btnAceptar.setBounds(165, 148, 105, 33);
+		contentPane.add(btnAceptar);
+		
+		lblResultado = new JLabel("");
+		lblResultado.setFont(new Font("Verdana", Font.PLAIN, 14));
+		lblResultado.setBounds(55, 109, 297, 24);
+		contentPane.add(lblResultado);
+		
+		this.getRootPane().setDefaultButton(btnAceptar);
+
+	}
+
+	protected void sumar() {
+		int num, num2; 
+		
+		try {
+			num = Integer.parseInt(txtNumero1.getText());
+			num2 =Integer.parseInt(txtNumero2.getText());
+			
+			int res = num+num2;
+			lblResultado.setText("La suma es: "+res);
+		} catch(NumberFormatException e ) {
+			JOptionPane.showMessageDialog(this, 
+					"Introduzca un número válido", 
+					"Número incorrecto",
+					JOptionPane.INFORMATION_MESSAGE);
+		}
+		
+		
 	}
 }
